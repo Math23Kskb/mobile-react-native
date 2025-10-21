@@ -1,16 +1,10 @@
-// src/modules/product/product.service.ts
-
 import { HttpError } from '../../lib/HttpError'; 
-// Importa todas as funções do repositório
 import * as repository from './product.repository';
-// Importa os DTOs (tipos de dados) do validador
 import { CreateProductDTO, ListProductsQueryDTO, UpdateProductDTO } from './product.validators';
 
 export const productService = {
   /**
    * Cria um novo produto.
-   * Por enquanto, apenas repassa para o repositório.
-   * Lógicas mais complexas (ex: verificar duplicidade de nome) ficariam aqui.
    */
   async create(data: CreateProductDTO) {
     return await repository.create(data);
@@ -32,7 +26,6 @@ export const productService = {
    * Lista produtos com base nos filtros e paginação.
    */
   async list(query: ListProductsQueryDTO) {
-    // A lógica de paginação e busca já está no repositório.
     return await repository.list(query);
   },
 
@@ -57,5 +50,13 @@ export const productService = {
     await this.findById(id);
 
     return await repository.remove(id);
+  },
+
+  async getStats() {
+    return await repository.getStats();
+  },
+
+  async listRecent() {
+    return await repository.listRecent();
   },
 };

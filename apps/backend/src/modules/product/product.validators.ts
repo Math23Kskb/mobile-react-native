@@ -26,8 +26,10 @@ export const createProductSchema = z
        })
       .positive('preço deve ser um número positivo'),
 
-    categoria: z.enum(CATEGORIA 
-    ),
+    categoria: z.enum(CATEGORIA, {
+      required_error: 'A categoria é obrigatória',
+      invalid_type_error: 'A categoria deve ser um dos valores válidos'
+    }),
 
     estoque: z
       .number({
@@ -58,9 +60,9 @@ export const updateProductSchema = z
 
     preco: z.number().positive('preço deve ser um número positivo').optional(),
 
-    categoria: z.enum(CATEGORIA,
-      "A categoria é obrigatória e deve ser um dos valores válidos"
-    ).optional(),
+    categoria: z.enum(CATEGORIA, {
+      errorMap: () => ({ message: "A categoria deve ser um dos valores válidos" }),
+    }).optional(),
 
     estoque: z
       .number()

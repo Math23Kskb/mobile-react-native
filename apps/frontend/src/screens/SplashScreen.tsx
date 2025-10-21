@@ -24,7 +24,6 @@ const SplashScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* MotiView is replaced with a simple Text component */}
       <Text style={styles.text}>Carregando Produtos...</Text>
     </View>
   );

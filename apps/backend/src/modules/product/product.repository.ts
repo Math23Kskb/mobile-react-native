@@ -1,8 +1,5 @@
 import { prisma } from '../../lib/prisma';
-// Importa a instância única (singleton) do Prisma Client.
-
 import { Prisma } from '@prisma/client';
-// Tipos utilitários gerados pelo Prisma (WhereInput, GetPayload, etc).
 
 import { CreateProductDTO, ListProductsQueryDTO, UpdateProductDTO } from './product.validators';
 
@@ -77,5 +74,35 @@ export function update(id: number, data: UpdateProductDTO): Promise<Product> {
 export function remove(id: number): Promise<Product> {
   return prisma.produtos.delete({
     where: { id_produto: id },
+  });
+}
+
+export async function getStats() {
+  const totalProducts = await prisma.produtos.count({
+    where: { ativo: true },
+  });
+
+  
+  const allProducts = await prisma.produtos.findMany({
+    where: { ativo: true },
+  });
+  
+  const totalStockValue = allProducts.reduce((sum, product) => {
+    return sum + (product.preco.toNumber() * product.estoque);
+  }, 0);
+
+
+  return { totalProducts, totalStockValue };
+}
+
+/**
+ * Busca os 5 produtos criados mais recentemente.
+ */
+export async function listRecent(): Promise<Product[]> {
+  return prisma.produtos.findMany({
+    take: 5,
+    orderBy: {
+      criado_em: 'desc',
+    },
   });
 }

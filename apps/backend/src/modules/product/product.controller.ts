@@ -38,4 +38,14 @@ export const productController = {
     await productService.remove(id);
     return res.status(204).send();
   },
+
+  async getStats(_req: Request, res: Response) {
+    const stats = await productService.getStats();
+    return res.status(200).json(stats);
+  },
+
+  async listRecent(_req: Request, res: Response) {
+    const products = await productService.listRecent();
+    return res.status(200).json(products);
+  },
 };

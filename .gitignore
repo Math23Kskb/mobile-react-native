@@ -1,14 +1,32 @@
 ﻿# Node
 **/node_modules
 **/dist
+# Adição: Arquivos de cache do Node
+.pnp.*
+.npm
+.yarn/cache
+.yarn/install-state.gz
+.yarn/patches
+.yarn/plugins
+.yarn/releases
+.yarn/sdks
+.yarn/versions
+
 # Ambiente
 **/.env
 **/.env.local
+
 # Logs
 **/npm-debug.log*
 **/yarn-debug.log*
 **/yarn-error.log*
 **/pnpm-debug.log*
+
+# Adição: Cache e builds do Expo
+.expo/
+.expo-shared/
+web-build/
+
 # Sistema/IDE
 .DS_Store
 .idea

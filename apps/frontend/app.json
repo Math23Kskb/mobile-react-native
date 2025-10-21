@@ -27,7 +27,7 @@
       "favicon": "./assets/favicon.png"
     },
     "extra": {
-      "apiUrl": "http://locahost:3333"
+      "apiUrl": "http://localhost:3333"
     }
   }
 }
